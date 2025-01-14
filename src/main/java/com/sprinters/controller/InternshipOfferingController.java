@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -18,6 +19,14 @@ public class InternshipOfferingController {
     @GetMapping()
     public List<InternshipOfferingDto> getAll() {
         return internshipOfferingService.getAllInternshipOfferings();
+    }
+
+    @GetMapping(path = "/filter")
+    public List<InternshipOfferingDto> getOfferingsFiltered(@RequestParam("technology") Optional<String> technology,
+                                                            @RequestParam("location") Optional<String> location,
+                                                            @RequestParam("paid") Optional<Boolean> paid,
+                                                            @RequestParam("minimumPay") Optional<Integer> minimumPay){
+        return internshipOfferingService.getInternshipOfferingsFiltered(technology, location, paid, minimumPay);
     }
 
     @GetMapping(path = "/{offeringId}")

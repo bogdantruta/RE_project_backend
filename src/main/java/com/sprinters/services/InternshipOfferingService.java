@@ -1,21 +1,17 @@
 package com.sprinters.services;
 
-import com.sprinters.dtos.ApplicationDto;
 import com.sprinters.dtos.CreateInternshipOfferingDto;
 import com.sprinters.dtos.InternshipOfferingDto;
-import com.sprinters.enums.ApplicationStatus;
-import com.sprinters.model.Application;
 import com.sprinters.model.InternshipOffering;
-import com.sprinters.repository.ApplicationRepository;
 import com.sprinters.repository.InternshipOfferingRepository;
 import com.sprinters.repository.UserRepository;
 import com.sprinters.utils.exceptions.NotFoundException;
-import com.sprinters.utils.mapper.ApplicationMapper;
 import com.sprinters.utils.mapper.InternshipOfferingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -49,5 +45,29 @@ public class InternshipOfferingService {
                         internshipOfferingMapper.createDtoToEntity(createInternshipOfferingDto)
                 )
         );
+    }
+
+    public List<InternshipOfferingDto> getInternshipOfferingsFiltered(Optional<String> technology,
+                                                                      Optional<String> location,
+                                                                      Optional<Boolean> paid,
+                                                                      Optional<Integer> minimumPay) {
+        return internshipOfferingRepository.findAll().stream()
+                .filter(internshipOffering -> {
+                    if (technology.isPresent() && !technology.get().equals(internshipOffering.getTechnology().name())) {
+                        return false;
+                    }
+                    if (location.isPresent() && !location.get().equals(internshipOffering.getLocation())) {
+                        return false;
+                    }
+                    if (paid.isPresent() && !paid.get().equals(internshipOffering.getPaid())) {
+                        return false;
+                    }
+                    if (minimumPay.isPresent() && minimumPay.get() > internshipOffering.getMinimumPay()) {
+                        return false;
+                    }
+                    return true;
+                })
+                .map(this::mapOffer)
+                .toList();
     }
 }
