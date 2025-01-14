@@ -21,5 +21,5 @@ CREATE TABLE application (
     applicant_id UUID NOT NULL,
     application_status VARCHAR(255) NOT NULL,
     created TIMESTAMP NOT NULL,
-    interview_date_time TIMESTAMP NOT NULL
+    interview_date_time TIMESTAMP
 );

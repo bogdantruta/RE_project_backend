@@ -2,14 +2,13 @@ package com.sprinters.dtos;
 
 
 import com.sprinters.enums.Technology;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class InternshipOfferingDto {

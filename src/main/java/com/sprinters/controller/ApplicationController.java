@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "/internship-offering")
+@RequestMapping(path = "/application")
 public class ApplicationController {
     private final ApplicationService applicationService;
 

@@ -1,13 +1,8 @@
 package com.sprinters.controller;
 
-import com.sprinters.dtos.ApplicationDto;
 import com.sprinters.dtos.CreateInternshipOfferingDto;
 import com.sprinters.dtos.InternshipOfferingDto;
-import com.sprinters.dtos.UserDto;
-import com.sprinters.model.User;
-import com.sprinters.security.SecurityContextHolderAdapter;
 import com.sprinters.services.InternshipOfferingService;
-import com.sprinters.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
